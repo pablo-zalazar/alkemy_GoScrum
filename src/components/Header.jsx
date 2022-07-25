@@ -1,8 +1,9 @@
 import React from "react";
 import "../styles/header.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 import { useSelector } from "react-redux";
+import { logRoles } from "@testing-library/react";
 
 function Header() {
   const navigate = useNavigate();
@@ -14,20 +15,40 @@ function Header() {
     localStorage.removeItem("userName");
     navigate("/login", { replace: true });
   };
+
+  const loged = () => {
+    return localStorage.getItem("token");
+  };
+
   return (
-    <header>
-      <img src="/img/goscrum.png" alt="logo" />
-      <div className="wrapper_right_header">
-        <div>
-          <button onClick={() => navigate("/donate", { replace: true })}>
-            Donar
-          </button>
-        </div>
-        <div className="black">areas creadas: {tasks?.length}</div>
-        <div className="lack">{localStorage.getItem("userName")}</div>
-        <div onClick={handleLogout}>X</div>
-      </div>
-    </header>
+    <>
+      {loged() ? (
+        <header>
+          <Link to="/">
+            <img src="/img/goscrum.png" alt="logo" />
+          </Link>
+          <div className="wrapper_right_header">
+            <button
+              className="donar"
+              onClick={() => navigate("/donate", { replace: true })}
+            >
+              Donar
+            </button>
+            <p className="black">areas creadas: {tasks?.length}</p>
+            <p className="black">{localStorage.getItem("userName")}</p>
+            <button className="exit" onClick={handleLogout}>
+              X
+            </button>
+          </div>
+        </header>
+      ) : (
+        <header>
+          <Link to="/login">
+            <img src="/img/goscrum.png" alt="logo" />
+          </Link>
+        </header>
+      )}
+    </>
   );
 }
 

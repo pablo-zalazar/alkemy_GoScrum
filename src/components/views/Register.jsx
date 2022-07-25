@@ -7,6 +7,7 @@ import { v4 as uuidv4 } from "uuid";
 import { Switch, FormControlLabel } from "@mui/material";
 
 import "../../styles/Login.css";
+import Button from "../Button";
 
 const { REACT_APP_API_ENDPOINT } = process.env;
 // console.log(REACT_APP_API_ENDPOINT);
@@ -54,7 +55,7 @@ function Register() {
 
   const onSubmit = () => {
     const teamID = !values.teamID ? uuidv4() : values.teamID;
-    console.log(values);
+
     fetch(`${REACT_APP_API_ENDPOINT}auth/register`, {
       method: "POST",
       headers: {
@@ -74,7 +75,9 @@ function Register() {
     })
       .then((response) => response.json())
       .then((data) =>
-        navigate("/registered/" + data?.result?.user?.teamID, { replace: true })
+        navigate("/registered/" + data?.result?.user?.teamID, {
+          replace: true,
+        })
       );
   };
 
@@ -91,10 +94,10 @@ function Register() {
   } = formik;
 
   return (
-    <div className="auth">
+    <div className="container">
       <form onSubmit={handleSubmit}>
         <h1>Registro</h1>
-        <div>
+        <div className="input">
           <label>Nombre de usuario</label>
           <input
             type="text"
@@ -108,7 +111,7 @@ function Register() {
             <span className="error-message">{errors.userName}</span>
           )}
         </div>
-        <div>
+        <div className="input">
           <label>Contraseña</label>
           <input
             type="password"
@@ -122,7 +125,7 @@ function Register() {
             <span className="error-message">{errors.password}</span>
           )}
         </div>
-        <div>
+        <div className="input">
           <label>Email</label>
           <input
             type="email"
@@ -144,13 +147,13 @@ function Register() {
                 formik.setFieldValue("switch", !formik.values.switch)
               }
               name="switch"
-              color="secondary"
+              color="primary"
             />
           }
           label="Pertenecés a un equipo ya creado"
         />
         {values.switch && (
-          <div>
+          <div className="input">
             <label>Por favor, introduce el identificador de equipo</label>
             <input
               type="text"
@@ -160,7 +163,7 @@ function Register() {
             />
           </div>
         )}
-        <div>
+        <div className="input">
           <label>Rol</label>
           <select
             name="role"
@@ -180,7 +183,7 @@ function Register() {
             <span className="error-message">{errors.role}</span>
           )}
         </div>
-        <div>
+        <div className="input">
           <label>Continente</label>
           <select
             name="continent"
@@ -203,7 +206,7 @@ function Register() {
           )}
         </div>
         {values.continent === "America" && (
-          <div>
+          <div className="input">
             <label>Región</label>
             <select
               name="region"
@@ -228,20 +231,13 @@ function Register() {
           </div>
         )}
         <div>
-          <button type="submit">Enviar</button>
-        </div>
-        <div>
+          <Button type="submit" text="Enviar" />
           <Link to="/login">Ir a Iniciar sesión</Link>
         </div>
+        <div></div>
       </form>
     </div>
   );
 }
 
 export default Register;
-
-// 1 2 3 4 5
-// {
-//   "userName": "usuarioNuevo1",
-//   "password": "asdasd"
-// }

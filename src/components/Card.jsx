@@ -44,6 +44,7 @@ function Card({ data, deleteCard, editCardStatus }) {
           <p>{limitString(data.description).string}</p>
           {limitString(data.description).addButton && (
             <button
+              className="ver"
               type="button"
               onClick={() => {
                 setShowMore(!showMore);
@@ -57,6 +58,7 @@ function Card({ data, deleteCard, editCardStatus }) {
         <>
           <p>{data.description}</p>
           <button
+            className="ver"
             type="button"
             onClick={() => {
               setShowMore(!showMore);

@@ -1,43 +1,59 @@
 header {
   box-shadow: 0 2px 5px #dbdbdb;
   display: flex;
-  justify-content: space-between;
-  padding: 12px 15px;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px;
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
 }
 
-header > img {
+header img {
   width: 90px;
 }
 
 header > div {
-  cursor: pointer;
-  color: var(--global-primary-color);
 }
 
 .wrapper_right_header {
   display: flex;
-  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.wrapper_right_header div {
-  padding-right: 15px;
+.wrapper_right_header .exit {
+  padding: 0 5px;
+  cursor: pointer;
+  border: none;
+  font-weight: 700;
+  color: black;
+  font-size: 1rem;
 }
 
-.black {
-  color: black !important;
-  font-size: 14px;
-  padding-top: 2px;
+.wrapper_right_header .black {
+  color: black;
+  font-size: 1rem;
 }
 
-header button {
+header .donar {
   border-radius: 4px;
   border-width: 1px;
-  font-size: 0.6rem;
+  font-size: 10px;
   font-weight: 700;
   margin: 0 0.2rem 0.15rem 0;
-  padding: 0.1rem 0.3rem;
-  background-color: var(--global-primary-color);
+  padding: 5px;
+  background-color: var(--global-button-color);
   border-color: var(--global-primary-color);
   color: white;
   cursor: pointer;
+}
+
+@media screen and (min-width: 400px) {
+  header {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  header .wrapper_right_header {
+    gap: 20px;
+  }
 }

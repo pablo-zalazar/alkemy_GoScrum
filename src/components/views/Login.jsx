@@ -1,4 +1,5 @@
 import React from "react";
+import Button from "../Button";
 import { useFormik } from "formik";
 import { useNavigate, Link } from "react-router-dom";
 
@@ -6,6 +7,7 @@ import * as Yup from "yup";
 import "../../styles/Login.css";
 
 import alert from "../../utils/alert";
+
 const { REACT_APP_API_ENDPOINT: API_ENDPOINT } = process.env;
 
 function Login() {
@@ -50,10 +52,10 @@ function Login() {
     formik;
 
   return (
-    <div className="auth">
+    <div className="container">
       <form onSubmit={handleSubmit}>
         <h1>Inicio sesion</h1>
-        <div>
+        <div className="input">
           <label htmlFor="userName">Usuario</label>
           <input
             name="userName"
@@ -69,7 +71,7 @@ function Login() {
           )}
         </div>
 
-        <div>
+        <div className="input">
           <label htmlFor="password">Contraseña</label>
           <input
             name="password"
@@ -84,8 +86,9 @@ function Login() {
             <span className="error-message">{errors.password}</span>
           )}
         </div>
-        <button type="submit">Login</button>
+
         <div>
+          <Button text="Login" />
           <Link to="/registro">Registrarme</Link>
         </div>
       </form>

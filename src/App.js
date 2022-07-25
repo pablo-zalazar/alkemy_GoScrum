@@ -4,6 +4,7 @@ import Register from "./components/views/Register";
 import Tasks from "./components/views/Tasks";
 import Registered from "./components/views/Registered";
 import { Donate } from "./components/views/Donate";
+import Header from "./components/Header";
 
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
@@ -35,98 +36,101 @@ export const App = () => {
   const location = useLocation();
 
   return (
-    <AnimatePresence>
-      <Routes location={location} key={location.pathname}>
-        <Route
-          path="/"
-          element={
-            <motion.div
-              className="page"
-              initial="out"
-              animate="in"
-              exit="out"
-              variants={pageTransition}
-            >
-              <RequireAuth>
-                <Tasks />
-              </RequireAuth>
-            </motion.div>
-          }
-        />
-        <Route
-          path="/login"
-          element={
-            <motion.div
-              className="page"
-              initial="out"
-              animate="in"
-              exit="out"
-              variants={pageTransition}
-            >
-              <Login />
-            </motion.div>
-          }
-        />
-        <Route
-          path="/registro"
-          element={
-            <motion.div
-              className="page"
-              initial="out"
-              animate="in"
-              exit="out"
-              variants={pageTransition}
-            >
-              <Register />
-            </motion.div>
-          }
-        />
-        <Route
-          path="/donate"
-          element={
-            <motion.div
-              className="page"
-              initial="out"
-              animate="in"
-              exit="out"
-              variants={pageTransition}
-            >
-              <Donate />
-            </motion.div>
-          }
-        />
-        <Route
-          path="/registered/:teamID"
-          element={
-            <motion.div
-              className="page"
-              initial="out"
-              animate="in"
-              exit="out"
-              variants={pageTransition}
-            >
-              <Registered />
-            </motion.div>
-          }
-        />
-        <Route
-          path="*"
-          element={
-            <motion.div
-              className="page"
-              initial="out"
-              animate="in"
-              exit="out"
-              variants={pageTransition}
-            >
-              {/* fallback es lo que muestra hasta cargar el componente */}
-              <Suspense fallback={<>Cargando...</>}>
-                <Error404 />
-              </Suspense>
-            </motion.div>
-          }
-        />
-      </Routes>
-    </AnimatePresence>
+    <>
+      <Header />
+      <AnimatePresence>
+        <Routes location={location} key={location.pathname}>
+          <Route
+            path="/"
+            element={
+              <motion.div
+                className="page"
+                initial="out"
+                animate="in"
+                exit="out"
+                variants={pageTransition}
+              >
+                <RequireAuth>
+                  <Tasks />
+                </RequireAuth>
+              </motion.div>
+            }
+          />
+          <Route
+            path="/login"
+            element={
+              <motion.div
+                className="page"
+                initial="out"
+                animate="in"
+                exit="out"
+                variants={pageTransition}
+              >
+                <Login />
+              </motion.div>
+            }
+          />
+          <Route
+            path="/registro"
+            element={
+              <motion.div
+                className="page"
+                initial="out"
+                animate="in"
+                exit="out"
+                variants={pageTransition}
+              >
+                <Register />
+              </motion.div>
+            }
+          />
+          <Route
+            path="/donate"
+            element={
+              <motion.div
+                className="page"
+                initial="out"
+                animate="in"
+                exit="out"
+                variants={pageTransition}
+              >
+                <Donate />
+              </motion.div>
+            }
+          />
+          <Route
+            path="/registered/:teamID"
+            element={
+              <motion.div
+                className="page"
+                initial="out"
+                animate="in"
+                exit="out"
+                variants={pageTransition}
+              >
+                <Registered />
+              </motion.div>
+            }
+          />
+          <Route
+            path="*"
+            element={
+              <motion.div
+                className="page"
+                initial="out"
+                animate="in"
+                exit="out"
+                variants={pageTransition}
+              >
+                {/* fallback es lo que muestra hasta cargar el componente */}
+                <Suspense fallback={<>Cargando...</>}>
+                  <Error404 />
+                </Suspense>
+              </motion.div>
+            }
+          />
+        </Routes>
+      </AnimatePresence>
+    </>
   );
 };

@@ -52,6 +52,7 @@
 .task-form input,
 .task-form select,
 .task-form textarea {
+  outline: none;
   padding: 5px;
   font-size: 1rem;
   border-radius: var(--global-radius);

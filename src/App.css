@@ -6,4 +6,5 @@
 
 body {
   background-color: var(--global-bg-color);
+  font-family: "Nunito", sans-serif;
 }

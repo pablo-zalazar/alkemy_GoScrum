@@ -1,113 +1,54 @@
-/* * {
-  font-family: "Nunito", sans-serif;
-}
-
-.auth {
-  min-height: 100vh;
+.container {
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 80vh;
+  padding: 10px;
 }
 
-.auth > form {
-  width: 100%;
-  padding: 20px;
+.container form h1 {
+  font-size: 2.5rem;
+}
+
+.container form label {
+  font-weight: 700;
+}
+
+.container form p,
+.container form input {
+  font-size: 1rem;
+}
+
+.container form input,
+.container form select {
+  padding: 5px;
+  outline: none;
+}
+
+.container form .input {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
   flex-direction: column;
+  /* height: 75px; */
+  margin-bottom: 10px;
 }
 
-.auth > form > div {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  flex-direction: column;
-  padding: 5px 0;
+.container form .input label {
+  margin-bottom: 5px;
 }
 
-.auth > form > div > *:not(label) {
-  padding: 8px 0;
-}
-
-.auth > form > div > input,
-.auth > form > div > select {
-  padding: 8px !important;
-}
-
-.auth > form > div > a {
+.container form div a {
+  margin-left: 10px;
+  font-weight: 700;
   text-decoration: none;
-  color: black;
+  color: var(--global-button-color);
 }
 
-.auth > form > div > div {
-  color: var(--global-primary-color);
-  font-size: 15px;
+.container form div a:hover {
+  color: var(--global-button-color-hover);
+  text-decoration: underline;
 }
 
-.auth h1 {
-  margin: 0;
-  font-size: 25px;
+.error-message {
+  color: red;
+  font-size: 14px;
 }
-
-.auth input,
-.auth select {
-  border-radius: var(--global-radius);
-  border: var(--global-border);
-}
-
-.auth a {
-  padding: 0 !important;
-}
-
-.auth button {
-  transition: all 0.3s ease-out;
-  background-color: var(--global-primary-color);
-  border-radius: var(--global-radius);
-  border: 0;
-  color: white;
-  padding: 10px !important;
-  font-size: 16px;
-  cursor: pointer;
-}
-
-.auth button:hover {
-  color: var(--global-primary-color);
-  border-radius: var(--global-radius);
-  border: 1px solid var(--global-primary-color);
-  background-color: white;
-  padding: 10px !important;
-  font-size: 16px;
-}
-
-.auth input.error,
-.auth select.error,
-.auth textarea.error {
-  border: 1px solid red;
-}
-
-.Mui-checked {
-  color: #ff452b !important;
-}
-
-.MuiSwitch-track {
-  background-color: #ff8b7c !important;
-}
-
-.MuiFormControlLabel-label {
-  font-size: 13px !important;
-  font-family: "Nunito", sans-serif !important;
-}
-
-@media screen and (min-width: 600px) {
-  .auth {
-    background-color: var(--global-bg-color-soft);
-  }
-
-  .auth > form {
-    border: var(--global-border);
-    width: 400px;
-    border-radius: var(--global-radius);
-    background-color: white;
-  }
-} */
