@@ -8,6 +8,7 @@ const Btn = styled.button`
   color: #ffffff;
   padding: 10px;
   font-size: 16px;
+  font-weight: 700;
   cursor: pointer;
   justify-content: center;
   transition: all 0.3s ease-out;

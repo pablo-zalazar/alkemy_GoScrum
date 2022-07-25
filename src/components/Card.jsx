@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "../styles/card.css";
 
 function Card({ data, deleteCard, editCardStatus }) {
   const datetime = new Date(data.createdAt).toLocaleString();
@@ -13,22 +14,31 @@ function Card({ data, deleteCard, editCardStatus }) {
 
   return (
     <div className="card">
-      <div className="close" onClick={() => deleteCard(data._id)}>
+      <button className="close" onClick={() => deleteCard(data._id)}>
         X
-      </div>
+      </button>
       <h3>{data.title}</h3>
-      <p>{datetime + " hs"}</p>
+      <p>
+        <span>{datetime + " hs"}</span>
+      </p>
       <p>{data.user.userName}</p>
-      <button
-        className={data.status.toLowerCase()}
-        type="button"
-        onClick={() => editCardStatus(data)}
-      >
-        {data.status}
-      </button>
-      <button className={data.importance.toLowerCase()} type="button">
-        {data.importance}
-      </button>
+      <div>
+        <button
+          className={
+            data.status === "IN PROGRESS"
+              ? "in_progress"
+              : data.status.toLowerCase()
+          }
+          type="button"
+          onClick={() => editCardStatus(data)}
+        >
+          {data.status}
+        </button>
+        <button className={data.importance.toLowerCase()} type="button">
+          {data.importance}
+        </button>
+      </div>
+
       {!showMore ? (
         <>
           <p>{limitString(data.description).string}</p>
@@ -52,7 +62,7 @@ function Card({ data, deleteCard, editCardStatus }) {
               setShowMore(!showMore);
             }}
           >
-            Ver Mas
+            Ver Menos
           </button>
         </>
       )}

@@ -1,0 +1,115 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 3px;
+  position: relative;
+  border-radius: var(--global-radius);
+  border: var(--global-border);
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+  background-color: #fff;
+  padding: 10px;
+}
+
+.card h3 {
+  font-size: 1.4rem;
+}
+
+.card p {
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.card p span {
+  font-weight: 500;
+}
+
+.card div {
+  display: flex;
+  gap: 3px;
+}
+
+.card button {
+  padding: 5px;
+  font-weight: 700;
+  color: #ffffff;
+  border: var(--global-border);
+  transition: all 0.3s ease-out;
+  cursor: pointer;
+}
+
+.card button:hover {
+  border: var(--global-border-hover);
+}
+
+.card .close {
+  width: 25px;
+  height: 25px;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background-color: #ff0000;
+  border-radius: 50%;
+}
+
+.card .close:hover {
+  background-color: #e90000;
+}
+
+.card .close:active {
+  background-color: #d30000;
+}
+
+.card .new,
+.card .in_progress,
+.card .finished {
+  background-color: var(--global-button-color);
+}
+
+.card .new:hover,
+.card .in_progress:hover,
+.card .finished:hover {
+  background-color: var(--global-button-color-hover);
+}
+
+.card .new:active,
+.card .in_progress:active,
+.card .finished:active {
+  background-color: var(--global-button-color-active);
+}
+
+.card .low {
+  background-color: #00ff00;
+}
+
+.card .low:hover {
+  background-color: #00eb00;
+}
+
+/* .card .low:active {
+  background-color: #00de00;
+}
+
+.card .medium {
+  background-color: #ffb900;
+} */
+
+/* .card .medium:hover {
+  background-color: #e8a800;
+}
+
+.card .medium:active {
+  background-color: #d79c00;
+} */
+
+.card .high {
+  background-color: #ff0000;
+}
+
+/* .card .high:hover {
+  background-color: #e80000;
+}
+
+.card .high:active {
+  background-color: #d00000;
+} */

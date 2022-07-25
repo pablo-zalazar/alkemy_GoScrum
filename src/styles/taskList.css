@@ -10,11 +10,16 @@
   margin-bottom: 10px;
 }
 
+.tasksList h3 {
+  font-size: 1.6rem;
+  text-align: center;
+}
+
 .tasksList .filters {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  margin-bottom: 20px;
+  gap: 8px;
+  margin-bottom: 10px;
 }
 
 .tasksList .filters input,
@@ -33,9 +38,30 @@
   gap: 10px;
 }
 
+.tasksList .list_group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.tasksList .list_group .list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
 @media (min-width: 900px) {
   .tasksList {
     flex-basis: 60%;
+  }
+
+  .tasksList .list_group {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .tasksList .list_group > * {
+    flex: 1;
   }
 }
 

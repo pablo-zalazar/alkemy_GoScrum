@@ -27,7 +27,10 @@ export const getTasks = (path) => {
       },
     })
       .then((response) => response.json())
-      .then((data) => dispatch(taskSuccess(data.result)))
+      .then((data) => {
+        console.log(data);
+        dispatch(taskSuccess(data.result));
+      })
       .catch((e) => dispatch(taskFailure(e)));
   };
 };

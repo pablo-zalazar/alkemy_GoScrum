@@ -141,17 +141,17 @@ function TaskList() {
         ) : (
           <div className="list_group">
             <div className="list">
-              <h4>Nuevas</h4>
+              <h3>Nuevas</h3>
               {renderColumCards("NEW")}
             </div>
 
             <div className="list">
-              <h4>En proceso</h4>
+              <h3>En proceso</h3>
               {renderColumCards("IN PROGRESS")}
             </div>
 
             <div className="list">
-              <h4>Finalizadas</h4>
+              <h3>Finalizadas</h3>
               {renderColumCards("FINISHED")}
             </div>
           </div>
