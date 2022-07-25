@@ -1,4 +1,4 @@
-main {
+/* main {
   min-height: 100vh;
   display: flex;
   justify-content: center;
@@ -21,4 +21,4 @@ main section {
     border-radius: var(--global-radius);
     background-color: white;
   }
-}
+} */

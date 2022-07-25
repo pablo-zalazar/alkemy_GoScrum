@@ -1,0 +1,50 @@
+.tasksList {
+  flex-basis: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+
+.tasksList h2 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.tasksList .filters {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.tasksList .filters input,
+.tasksList .filters select {
+  padding: 5px;
+  border-radius: var(--global-radius);
+  border: var(--global-border);
+}
+
+.tasksList .filters * {
+  font-size: 1rem;
+}
+
+.tasksList .filters div div {
+  display: flex;
+  gap: 10px;
+}
+
+@media (min-width: 900px) {
+  .tasksList {
+    flex-basis: 60%;
+  }
+}
+
+@media (min-width: 1300px) {
+  .tasksList .filters {
+    flex-direction: row;
+  }
+
+  .tasksList .filters > * {
+    flex: 1;
+  }
+}

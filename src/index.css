@@ -1,10 +1,15 @@
 @import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,700;1,200&display=swap");
 
 :root {
-  --global-primary-color: #ff452b;
-  --global-bg-color-soft: #fafafa;
+  --global-button-color: #5dade2;
+  --global-button-color-hover: #2e86c1;
+  --global-button-color-active: #2874a6;
+
+  --global-bg-color: #eeeeee;
+
   --global-radius: 8px;
-  --global-border: 1px solid #e9e9e9;
+  --global-border: 1px solid #d9d9d9;
+  --global-border-hover: 1px solid #a9a9a9;
 }
 
 body {

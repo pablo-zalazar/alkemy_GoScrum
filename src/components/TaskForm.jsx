@@ -11,6 +11,8 @@ import "../styles/taskForm.styles.css";
 import { useDispatch } from "react-redux";
 import { getTasks } from "../store/actions/taskActions.js";
 
+import Button from "./Button";
+
 const { REACT_APP_API_ENDPOINT: API_ENDPOINT } = process.env;
 
 function TaskForm() {
@@ -70,7 +72,6 @@ function TaskForm() {
   return (
     <section className="task-form">
       <h2>Crear tarea</h2>
-      <p>Crea tus tareas</p>
       <form onSubmit={handleSubmit}>
         <div>
           <div>
@@ -95,7 +96,7 @@ function TaskForm() {
               onBlur={handleBlur}
               className={errors.status && touched.status ? "error" : ""}
             >
-              <option value="">--Seleccionar--</option>
+              <option value="">Estado</option>
               <option value="NEW">Nueva</option>
               <option value="IN PROGRESS">En proceso</option>
               <option value="FINISHED">Terminada</option>
@@ -113,7 +114,7 @@ function TaskForm() {
               onBlur={handleBlur}
               className={errors.importance && touched.importance ? "error" : ""}
             >
-              <option value="">--Seleccionar--</option>
+              <option value="">Importancia</option>
               <option value="LOW">Baja</option>
               <option value="MEDIUM">Media</option>
               <option value="HIGH">Alta</option>
@@ -137,7 +138,7 @@ function TaskForm() {
             <span className="error-message">{errors.description}</span>
           )}
         </div>
-        <button type="submit">Crear</button>
+        <Button text="Crear" type="submit" />
       </form>
       <ToastContainer />
     </section>
