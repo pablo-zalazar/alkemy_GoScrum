@@ -1,21 +1,35 @@
-/* main {
+.donate {
   min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-main section {
-  width: 100%;
+.donate section {
   padding: 20px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   flex-direction: column;
+  border: var(--global-border);
+  max-width: 400px;
+  border-radius: var(--global-radius);
+  background-color: white;
 }
 
-@media screen and (min-width: 600px) {
-  main section {
+.donate section a {
+  font-weight: 700;
+  text-decoration: none;
+  color: var(--global-button-color);
+}
+
+.donate section a:hover {
+  color: var(--global-button-color-hover);
+  text-decoration: underline;
+}
+
+/* @media screen and (min-width: 600px) {
+  .donate section {
     border: var(--global-border);
     width: 400px;
     border-radius: var(--global-radius);

@@ -41,7 +41,11 @@ function Login() {
           localStorage.setItem("userName", data.result.user.userName);
           navigate("/", { replace: true });
         } else {
-          alert("Credenciales invalidas", "Introduce un usario existente");
+          alert(
+            "Credenciales invalidas",
+            "Introduce un usario existente",
+            "error"
+          );
         }
       });
   };

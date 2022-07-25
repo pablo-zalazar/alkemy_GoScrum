@@ -4,10 +4,13 @@ import { useState, useEffect } from "react";
 
 import Card from "./Card";
 
-import Skeleton from "react-loading-skeleton";
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
 import debounce from "lodash.debounce";
+
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import {
   Radio,
@@ -68,6 +71,15 @@ function TaskList() {
 
   const handleDeleteCard = (id) => {
     dispatch(deleteTask(id));
+    toast.warn(`Tarea eliminada correctamente`, {
+      position: "top-center",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
   };
 
   const handleEditCardStatus = (data) => {
@@ -157,7 +169,11 @@ function TaskList() {
           </div>
         )
       ) : (
-        <Skeleton />
+        <SkeletonTheme baseColor="#DFDFDF" highlightColor="#7C7C7C">
+          <p>
+            <Skeleton count={3} />
+          </p>
+        </SkeletonTheme>
       )}
     </section>
   );

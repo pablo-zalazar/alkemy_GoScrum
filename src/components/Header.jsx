@@ -1,18 +1,21 @@
 import React from "react";
 import "../styles/header.css";
 import { useNavigate, Link } from "react-router-dom";
-
+import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { logRoles } from "@testing-library/react";
 
+import { reset } from "../store/actions/taskActions.js";
+
 function Header() {
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
   const { tasks } = useSelector((state) => state.tasksReducer);
 
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("userName");
+    dispatch(reset());
     navigate("/login", { replace: true });
   };
 

@@ -1,4 +1,4 @@
-import { TASKS_REQUEST, TASKS_FAILURE, TASKS_SUCCESS } from "../types";
+import { TASKS_REQUEST, TASKS_FAILURE, TASKS_SUCCESS, RESET } from "../types";
 
 const initialState = {
   loading: false,
@@ -25,6 +25,12 @@ export const tasksReducer = (state = initialState, action) => {
         ...state,
         loading: false,
         error: action.payload,
+      };
+    case RESET:
+      return {
+        loading: false,
+        tasks: [],
+        error: "",
       };
     default:
       return { ...state };

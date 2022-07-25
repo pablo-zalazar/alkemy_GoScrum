@@ -1,7 +1,9 @@
 import Swal from "sweetalert2";
 
-function alert(title, message) {
+function alert(title, message, icon) {
   Swal.fire({
+    icon,
+    confirmButtonColor: "#5dade2",
     title: title,
     text: message,
     confirmButtonText: "Aceptar",

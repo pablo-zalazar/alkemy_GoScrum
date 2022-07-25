@@ -1,4 +1,4 @@
-import { TASKS_REQUEST, TASKS_FAILURE, TASKS_SUCCESS } from "../types";
+import { TASKS_REQUEST, TASKS_FAILURE, TASKS_SUCCESS, RESET } from "../types";
 
 const { REACT_APP_API_ENDPOINT: API_ENDPOINT } = process.env;
 
@@ -20,7 +20,9 @@ export const taskFailure = (error) => ({
 export const getTasks = (path) => {
   return async function (dispatch) {
     dispatch(taskRequest());
-    fetch(`${API_ENDPOINT}task/${path}`, {
+    const url = `${API_ENDPOINT}task/${path}`;
+    console.log(url);
+    fetch(url, {
       headers: {
         "Content-Type": "application/json",
         Authorization: "Bearer " + localStorage.getItem("token"),
@@ -52,6 +54,14 @@ export const deleteTask = (id) => {
       .catch((e) => dispatch(taskFailure(e)));
   };
 };
+
+export function reset() {
+  return async function (dispatch) {
+    return dispatch({
+      type: RESET,
+    });
+  };
+}
 
 export const editTaskStatus = (data) => {
   const statusArray = ["NEW", "IN PROGRESS", "FINISHED"];
