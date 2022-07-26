@@ -42,6 +42,28 @@ header .donar {
   margin: 0 0.2rem 0.15rem 0;
   padding: 5px;
   background-color: var(--global-button-color);
+  border: var(--global-border);
+  color: white;
+  cursor: pointer;
+}
+
+header .donar:hover {
+  background-color: var(--global-button-color-hover);
+  border: var(--global-border-hover);
+}
+
+header .donar:active {
+  background-color: var(--global-button-color-active);
+}
+
+header .donar {
+  border-radius: 4px;
+  border-width: 1px;
+  font-size: 10px;
+  font-weight: 700;
+  margin: 0 0.2rem 0.15rem 0;
+  padding: 5px;
+  background-color: var(--global-button-color);
   border-color: var(--global-primary-color);
   color: white;
   cursor: pointer;

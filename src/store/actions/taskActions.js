@@ -17,10 +17,12 @@ export const taskFailure = (error) => ({
   payload: error,
 });
 
-export const getTasks = (path) => {
+export const getTasks = (taskFrom) => {
+  let url = "";
   return async function (dispatch) {
     dispatch(taskRequest());
-    const url = `${API_ENDPOINT}task/${path}`;
+    if (taskFrom === "ME") url = `${API_ENDPOINT}task/me`;
+    else url = `${API_ENDPOINT}task`;
     console.log(url);
     fetch(url, {
       headers: {
@@ -37,7 +39,7 @@ export const getTasks = (path) => {
   };
 };
 
-export const deleteTask = (id) => {
+export const deleteTask = (id, taskFrom) => {
   return function (dispatch) {
     dispatch(taskRequest());
     fetch(`${API_ENDPOINT}task/${id}`, {
@@ -49,21 +51,13 @@ export const deleteTask = (id) => {
     })
       .then((response) => response.json())
       .then((data) => {
-        dispatch(getTasks(""));
+        dispatch(getTasks(taskFrom));
       })
       .catch((e) => dispatch(taskFailure(e)));
   };
 };
 
-export function reset() {
-  return async function (dispatch) {
-    return dispatch({
-      type: RESET,
-    });
-  };
-}
-
-export const editTaskStatus = (data) => {
+export const editTaskStatus = (data, taskFrom) => {
   const statusArray = ["NEW", "IN PROGRESS", "FINISHED"];
   const newStatusIndex =
     statusArray.indexOf(data.status) > 1
@@ -89,8 +83,16 @@ export const editTaskStatus = (data) => {
     })
       .then((response) => response.json())
       .then(() => {
-        dispatch(getTasks(""));
+        dispatch(getTasks(taskFrom));
       })
       .catch((e) => dispatch(taskFailure(e)));
   };
 };
+
+export function reset() {
+  return async function (dispatch) {
+    return dispatch({
+      type: RESET,
+    });
+  };
+}

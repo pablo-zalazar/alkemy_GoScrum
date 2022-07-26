@@ -151,7 +151,6 @@ function TaskForm() {
         </div>
         <Button text="Crear" type="submit" />
       </form>
-      <ToastContainer />
     </section>
   );
 }

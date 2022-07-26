@@ -7,10 +7,12 @@ import Card from "./Card";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
-import debounce from "lodash.debounce";
+// import debounce from "lodash.debounce";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
+import Swal from "sweetalert2";
 
 import {
   Radio,
@@ -31,47 +33,80 @@ function TaskList() {
   const [list, setList] = useState(null);
   const [renderList, setRenderList] = useState(null);
   const [taskFrom, setTaskFrom] = useState("ALL");
-  const [search, setSearch] = useState("");
+  const [filter, setFilter] = useState({
+    nombre: "",
+    importancia: "ALL",
+  });
 
   const dispatch = useDispatch();
   const { loading, error, tasks } = useSelector((state) => state.tasksReducer);
 
   useEffect(() => {
-    dispatch(getTasks(taskFrom === "ME" ? "me" : ""));
-  }, [taskFrom, dispatch]);
+    dispatch(getTasks(taskFrom));
+    setFilter({
+      nombre: "",
+      importancia: "ALL",
+    });
+  }, [taskFrom]);
 
   useEffect(() => {
-    if (tasks?.length > 0) {
-      setList(tasks);
-      setRenderList(tasks);
-    }
+    setList(tasks);
+    setRenderList(tasks);
+    setFilter({
+      nombre: "",
+      importancia: "ALL",
+    });
   }, [tasks]);
 
   useEffect(() => {
-    if (search)
-      setRenderList(
-        list.filter((data) =>
-          data.title.toLowerCase().startsWith(search.toLowerCase().trim())
-        )
+    let lista = [];
+    // Filtro por importancia
+    if (filter?.importancia === "ALL") {
+      lista = list;
+    } else {
+      lista = list?.filter((data) => data.importance === filter.importancia);
+    }
+
+    if (filter?.nombre) {
+      lista = lista?.filter((data) =>
+        data.title.toLowerCase().includes(filter.nombre.toLowerCase().trim())
       );
-    else setRenderList(list);
-  }, [search, list]);
+    }
 
-  if (error) return <div>Hay un error</div>;
+    setRenderList(lista);
+  }, [filter]);
 
-  const handleChangeImportante = (e) => {
-    if (!e.target.value || e.target.value === "ALL") setRenderList(list);
-    else
-      setRenderList(list?.filter((data) => data.importance === e.target.value));
-  };
-
-  const handleSearch = debounce((e) => {
-    setSearch(e?.target?.value);
-  }, 1000);
+  // if (error) return <div>Hay un error</div>;
 
   const handleDeleteCard = (id) => {
-    dispatch(deleteTask(id));
-    toast.warn(`Tarea eliminada correctamente`, {
+    Swal.fire({
+      title: "Quieres eliminar la tarea?",
+      text: "Una vez eliminada la tarea no se puede recuperar!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      cancelButtonText: "NO",
+      confirmButtonText: "Si",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        dispatch(deleteTask(id, taskFrom));
+        toast.error(`Tarea eliminada correctamente`, {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      }
+    });
+  };
+
+  const handleEditCardStatus = (data) => {
+    dispatch(editTaskStatus(data, taskFrom));
+    toast.success("Tarea modificada correctamente", {
       position: "top-center",
       autoClose: 5000,
       hideProgressBar: false,
@@ -80,21 +115,6 @@ function TaskList() {
       draggable: true,
       progress: undefined,
     });
-  };
-
-  const handleEditCardStatus = (data) => {
-    dispatch(editTaskStatus(data));
-  };
-
-  const renderAllCards = () => {
-    return renderList?.map((data) => (
-      <Card
-        key={data._id}
-        data={data}
-        deleteCard={handleDeleteCard}
-        editCardStatus={handleEditCardStatus}
-      />
-    ));
   };
 
   const renderColumCards = (text) => {
@@ -121,7 +141,12 @@ function TaskList() {
             arial-labelledby="demo-row-radio-buttons-group-label"
             onChange={(e) => setTaskFrom(e.currentTarget.value)}
           >
-            <FormControlLabel value="ALL" control={<Radio />} label="Todas" />
+            <FormControlLabel
+              selected
+              value="ALL"
+              control={<Radio />}
+              label="Todas"
+            />
             <FormControlLabel
               value="ME"
               control={<Radio />}
@@ -133,13 +158,24 @@ function TaskList() {
         <input
           type="text"
           placeholder="Buscar tarea"
-          onChange={(e) => handleSearch(e)}
+          value={filter.nombre}
+          onChange={(e) =>
+            setFilter({
+              ...filter,
+              nombre: e.target.value,
+            })
+          }
         />
 
-        <select name="importance" onChange={handleChangeImportante}>
-          <option value="" selected disabled>
-            Prioridad
-          </option>
+        <select
+          name="importance"
+          onChange={(e) =>
+            setFilter({
+              ...filter,
+              importancia: e.target.value,
+            })
+          }
+        >
           <option value="ALL">Todas</option>
           <option value="LOW">Baja</option>
           <option value="MEDIUM">Media</option>
@@ -148,8 +184,8 @@ function TaskList() {
       </div>
 
       {!loading ? (
-        !renderList ? (
-          <h4>no hay tareas creadas</h4>
+        renderList?.length < 1 ? (
+          <h3>no hay tareas creadas</h3>
         ) : (
           <div className="list_group">
             <div className="list">
@@ -175,6 +211,7 @@ function TaskList() {
           </p>
         </SkeletonTheme>
       )}
+      <ToastContainer />
     </section>
   );
 }
