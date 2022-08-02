@@ -91,7 +91,7 @@ function Login() {
           )}
         </div>
 
-        <div>
+        <div className="login">
           <Button text="Login" />
           <Link to="/registro">Registrarme</Link>
         </div>

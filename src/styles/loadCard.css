@@ -1,0 +1,21 @@
+.skeleton {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  border-radius: var(--global-radius);
+  border: var(--global-border);
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+  padding: 10px;
+}
+
+.skeleton .close {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
+
+.skeleton div {
+  display: flex;
+  gap: 5px;
+}

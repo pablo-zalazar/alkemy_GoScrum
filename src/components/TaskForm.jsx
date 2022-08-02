@@ -1,30 +1,29 @@
-import React from "react";
-import { useFormik } from "formik";
+import "../styles/taskForm.css";
+
+import React, { useState } from "react";
 import {} from "react-router-dom";
-
 import * as Yup from "yup";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
-import "../styles/taskForm.styles.css";
-
 import { useDispatch } from "react-redux";
-import { getTasks } from "../store/actions/taskActions.js";
+import { Formik, Form, ErrorMessage, Field } from "formik";
 
+import { getTasks } from "../store/actions/taskActions.js";
 import Button from "./Button";
 
 const { REACT_APP_API_ENDPOINT: API_ENDPOINT } = process.env;
 
 function TaskForm() {
   const dispatch = useDispatch();
-  const initialValues = {
+  const [initialValues, setInitialValues] = useState({
     title: "",
     status: "",
     importance: "",
     description: "",
-  };
+  });
 
-  const onSubmit = () => {
+  const onSubmit = (values, resetForm) => {
+    console.log(values);
     fetch(`${API_ENDPOINT}task`, {
       method: "POST",
       headers: {
@@ -43,7 +42,8 @@ function TaskForm() {
       .then((response) => response.json())
       .then((data) => {
         dispatch(getTasks(""));
-        resetForm();
+
+        console.log(data);
         toast.success(
           `Tarea "${data.result.task.title}" creada correctamente`,
           {
@@ -57,100 +57,71 @@ function TaskForm() {
           }
         );
       });
+    resetForm();
   };
 
   const required = "Campo obligatorio";
 
-  const validationSchema = Yup.object().shape({
+  const createSchema = Yup.object().shape({
     title: Yup.string().min(6, "Al menos 6 caracteres").required(required),
     status: Yup.string().required(required),
     importance: Yup.string().required(required),
     description: Yup.string().required(required),
   });
 
-  const formik = useFormik({ initialValues, validationSchema, onSubmit });
-
-  const {
-    handleSubmit,
-    handleChange,
-    handleBlur,
-    errors,
-    touched,
-    values,
-    resetForm,
-  } = formik;
-
   return (
     <section className="task-form">
       <h2>Crear tarea</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
+      <Formik
+        initialValues={initialValues}
+        validationSchema={createSchema}
+        validateOnChange={false}
+        validateOnBlur={false}
+        onSubmit={(values, { resetForm }) => onSubmit(values, resetForm)}
+      >
+        <Form>
           <div>
-            <input
-              name="title"
-              placeholder="Nombre"
-              value={values.title}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              className={errors.title && touched.title ? "error" : ""}
-            />
-            {errors.title && touched.title && (
-              <span className="error-message">{errors.title}</span>
-            )}
+            <div>
+              <Field name="title" as="input" placeholder="Nombre" />
+              <p className="error-message">
+                <ErrorMessage name="title" />
+              </p>
+            </div>
+
+            <div>
+              <Field name="status" as="select">
+                <option value="">Estado</option>
+                <option value="NEW">Nueva</option>
+                <option value="IN PROGRESS">En proceso</option>
+                <option value="FINISHED">Terminada</option>
+              </Field>
+              <p className="error-message">
+                <ErrorMessage name="status" />
+              </p>
+            </div>
+
+            <div>
+              <Field name="importance" as="select">
+                <option value="">Importancia</option>
+                <option value="LOW">Baja</option>
+                <option value="MEDIUM">Media</option>
+                <option value="HIGH">Alta</option>
+              </Field>
+              <p className="error-message">
+                <ErrorMessage name="importance" />
+              </p>
+            </div>
           </div>
 
           <div>
-            <select
-              name="status"
-              onChange={handleChange}
-              value={values.status}
-              onBlur={handleBlur}
-              className={errors.status && touched.status ? "error" : ""}
-            >
-              <option value="">Estado</option>
-              <option value="NEW">Nueva</option>
-              <option value="IN PROGRESS">En proceso</option>
-              <option value="FINISHED">Terminada</option>
-            </select>
-            {errors.status && touched.status && (
-              <span className="error-message">{errors.status}</span>
-            )}
+            <Field name="description" as="textarea" placeholder="Descripcion" />
+            <p className="error-message">
+              <ErrorMessage name="description" />
+            </p>
           </div>
-
-          <div>
-            <select
-              name="importance"
-              onChange={handleChange}
-              value={values.importance}
-              onBlur={handleBlur}
-              className={errors.importance && touched.importance ? "error" : ""}
-            >
-              <option value="">Importancia</option>
-              <option value="LOW">Baja</option>
-              <option value="MEDIUM">Media</option>
-              <option value="HIGH">Alta</option>
-            </select>
-            {errors.importance && touched.importance && (
-              <span className="error-message">{errors.importance}</span>
-            )}
-          </div>
-        </div>
-
-        <div>
-          <textarea
-            name="description"
-            onChange={handleChange}
-            value={values.description}
-            placeholder="Descripcion"
-            onBlur={handleBlur}
-            className={errors.description && touched.description ? "error" : ""}
-          />
-          {errors.description && touched.description && (
-            <span className="error-message">{errors.description}</span>
-          )}
-        </div>
-        <Button text="Crear" type="submit" />
-      </form>
+          <Button text="Crear" type="submit" />
+        </Form>
+      </Formik>
     </section>
   );
 }

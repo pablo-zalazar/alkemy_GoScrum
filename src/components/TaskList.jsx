@@ -1,19 +1,10 @@
 import "../styles/taskList.css";
-
 import { useState, useEffect } from "react";
 
-import Card from "./Card";
-
-import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
-import "react-loading-skeleton/dist/skeleton.css";
-
 // import debounce from "lodash.debounce";
-
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
 import Swal from "sweetalert2";
-
 import {
   Radio,
   RadioGroup,
@@ -28,6 +19,9 @@ import {
   deleteTask,
   editTaskStatus,
 } from "../store/actions/taskActions.js";
+
+import Card from "./Card";
+import LoadCard from "./LoadCard";
 
 function TaskList() {
   const [list, setList] = useState(null);
@@ -84,8 +78,8 @@ function TaskList() {
       text: "Una vez eliminada la tarea no se puede recuperar!",
       icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
       cancelButtonText: "NO",
       confirmButtonText: "Si",
     }).then((result) => {
@@ -141,12 +135,7 @@ function TaskList() {
             arial-labelledby="demo-row-radio-buttons-group-label"
             onChange={(e) => setTaskFrom(e.currentTarget.value)}
           >
-            <FormControlLabel
-              selected
-              value="ALL"
-              control={<Radio />}
-              label="Todas"
-            />
+            <FormControlLabel value="ALL" control={<Radio />} label="Todas" />
             <FormControlLabel
               value="ME"
               control={<Radio />}
@@ -205,11 +194,22 @@ function TaskList() {
           </div>
         )
       ) : (
-        <SkeletonTheme baseColor="#DFDFDF" highlightColor="#7C7C7C">
-          <p>
-            <Skeleton count={3} />
-          </p>
-        </SkeletonTheme>
+        <div className="list_group">
+          <div className="list">
+            <h3>Nuevas</h3>
+            <LoadCard />
+          </div>
+
+          <div className="list">
+            <h3>En proceso</h3>
+            <LoadCard />
+          </div>
+
+          <div className="list">
+            <h3>Finalizadas</h3>
+            <LoadCard />
+          </div>
+        </div>
       )}
       <ToastContainer />
     </section>

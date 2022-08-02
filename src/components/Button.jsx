@@ -18,6 +18,8 @@ const Btn = styled.button`
   }
   &:active {
     background-color: var(--global-button-color-active);
+    position: relative;
+    top: 2px;
   }
 `;
 

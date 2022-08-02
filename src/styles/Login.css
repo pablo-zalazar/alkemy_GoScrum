@@ -51,6 +51,10 @@
   text-decoration: underline;
 }
 
+.container form > div.login {
+  position: relative;
+}
+
 .error-message {
   color: red;
   font-size: 14px;

@@ -42,8 +42,8 @@
 .tasksList .list_group {
   display: flex;
   flex-direction: column;
-  gap: 5px;
-  padding-right: 5px;
+  gap: 10px;
+  padding: 0 5px;
 }
 
 .tasksList .list_group .list {
@@ -56,6 +56,16 @@
   .tasksList {
     flex-basis: 60%;
   }
+}
+
+@media (min-width: 1300px) {
+  .tasksList .filters {
+    flex-direction: row;
+  }
+
+  .tasksList .filters > * {
+    flex: 1;
+  }
 
   .tasksList .list_group {
     height: 80vh;
@@ -65,16 +75,6 @@
   }
 
   .tasksList .list_group > * {
-    flex: 1;
-  }
-}
-
-@media (min-width: 1300px) {
-  .tasksList .filters {
-    flex-direction: row;
-  }
-
-  .tasksList .filters > * {
     flex: 1;
   }
 }

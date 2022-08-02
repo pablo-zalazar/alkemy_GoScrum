@@ -11,9 +11,6 @@ header img {
   width: 90px;
 }
 
-header > div {
-}
-
 .wrapper_right_header {
   display: flex;
   justify-content: space-between;
@@ -26,7 +23,10 @@ header > div {
   border: none;
   font-weight: 700;
   color: black;
-  font-size: 1rem;
+  font-size: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .wrapper_right_header .black {
@@ -39,12 +39,14 @@ header .donar {
   border-width: 1px;
   font-size: 10px;
   font-weight: 700;
-  margin: 0 0.2rem 0.15rem 0;
+  /* margin: 0 0.2rem 0.15rem 0; */
   padding: 5px;
   background-color: var(--global-button-color);
   border: var(--global-border);
   color: white;
   cursor: pointer;
+  min-width: 42px;
+  min-height: 25px;
 }
 
 header .donar:hover {
@@ -54,6 +56,8 @@ header .donar:hover {
 
 header .donar:active {
   background-color: var(--global-button-color-active);
+  position: relative;
+  top: 2px;
 }
 
 header .donar {
@@ -61,7 +65,7 @@ header .donar {
   border-width: 1px;
   font-size: 10px;
   font-weight: 700;
-  margin: 0 0.2rem 0.15rem 0;
+  /* margin: 0 0.2rem 0.15rem 0; */
   padding: 5px;
   background-color: var(--global-button-color);
   border-color: var(--global-primary-color);
@@ -69,7 +73,7 @@ header .donar {
   cursor: pointer;
 }
 
-@media screen and (min-width: 400px) {
+@media screen and (min-width: 500px) {
   header {
     flex-direction: row;
     justify-content: space-between;
