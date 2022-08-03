@@ -9,7 +9,7 @@ import { store } from "./store/store";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
+    <BrowserRouter basename="alkemy_GoScrum">
       <Provider store={store}>
         <App />
       </Provider>
@@ -19,5 +19,5 @@ root.render(
 
 /**
  * yarn build
- * yard global add serve
+ * yarn global add serve
  */

@@ -21,22 +21,21 @@ export const getTasks = (taskFrom) => {
   let url = "";
   return async function (dispatch) {
     dispatch(taskRequest());
-    setTimeout(() => {
-      if (taskFrom === "ME") url = `${API_ENDPOINT}task/me`;
-      else url = `${API_ENDPOINT}task`;
-      console.log(url);
-      fetch(url, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + localStorage.getItem("token"),
-        },
+
+    if (taskFrom === "ME") url = `${API_ENDPOINT}task/me`;
+    else url = `${API_ENDPOINT}task`;
+    console.log(url);
+    fetch(url, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("token"),
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        dispatch(taskSuccess(data.result));
       })
-        .then((response) => response.json())
-        .then((data) => {
-          dispatch(taskSuccess(data.result));
-        })
-        .catch((e) => dispatch(taskFailure(e)));
-    }, 1000);
+      .catch((e) => dispatch(taskFailure(e)));
   };
 };
 
