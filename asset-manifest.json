@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/alkemy_GoScrum/static/css/main.d7efd5e1.css",
+    "main.js": "/alkemy_GoScrum/static/js/main.30a3dd25.js",
+    "static/js/579.a9bc4ded.chunk.js": "/alkemy_GoScrum/static/js/579.a9bc4ded.chunk.js",
+    "index.html": "/alkemy_GoScrum/index.html",
+    "main.d7efd5e1.css.map": "/alkemy_GoScrum/static/css/main.d7efd5e1.css.map",
+    "main.30a3dd25.js.map": "/alkemy_GoScrum/static/js/main.30a3dd25.js.map",
+    "579.a9bc4ded.chunk.js.map": "/alkemy_GoScrum/static/js/579.a9bc4ded.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.d7efd5e1.css",
+    "static/js/main.30a3dd25.js"
+  ]
+}
